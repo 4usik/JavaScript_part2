@@ -1,0 +1,49 @@
+/*Добавляем стили для элементов*/
+
+body {
+	width: 80%;
+	margin: 0 auto;
+}
+
+header {
+	background-color: #BCB5BE;
+	text-align: center;
+	padding: 20px 0 20px;
+}
+
+.cart-button {
+	background-color: #7B2A6E;
+	box-shadow: 0 0 15px #6B075B;
+	color: #D26DC2;
+	font-weight: bold;
+	border-radius: 8px;
+	font-size: 20px;
+}
+
+main {
+	background-color: #BCB5B6;
+	font-size: 15px;
+}
+
+.goods-list {
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	padding: 20px 5% 20px 5%;
+}
+
+.goods-item {
+	margin: 20px;
+	height: 300px;
+	width: 43%;
+	border: 2px solid #6B075B;
+	text-align: center;
+	color: #7B2A6E;
+}
+
+footer {
+	height: 20px;
+	font-weight: bold;
+	text-align: end;
+	padding-right: 20px;
+}
