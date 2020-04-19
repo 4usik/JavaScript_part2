@@ -7,11 +7,12 @@ body {
 
 header {
 	background-color: #BCB5BE;
-	text-align: center;
-	padding: 20px 0 20px;
+	display: flex;
+	justify-content: space-between;
+	padding: 20px 10%;
 }
 
-.cart-button {
+.cart-button, .menu {
 	background-color: #7B2A6E;
 	box-shadow: 0 0 15px #6B075B;
 	color: #D26DC2;
@@ -39,6 +40,11 @@ main {
 	border: 2px solid #6B075B;
 	text-align: center;
 	color: #7B2A6E;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	font-size: 20px;
+	font-weight: bold;
 }
 
 footer {
@@ -46,4 +52,18 @@ footer {
 	font-weight: bold;
 	text-align: end;
 	padding-right: 20px;
+}
+
+p {
+	font-size: 30px;
+}
+
+.add {
+	background-color: #7B2A6E;
+	box-shadow: 0 0 15px #6B075B;
+	color: #D26DC2;
+	border-radius: 8px;
+	margin-bottom: 10px;
+	width: 80px;
+	align-self: center;
 }
