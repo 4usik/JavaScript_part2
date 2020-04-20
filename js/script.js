@@ -1,29 +1,5 @@
 "use strict"
 
-
-//hw1
-/*const goods = [
-  { title: 'Shirt', price: 150 },
-  { title: 'Socks', price: 50 },
-  { title: 'Jacket', price: 350 },
-  { title: 'Shoes', price: 250 },
-];
-
-
-const renderGoodsItem = (title, price) => {
-  return `<div class="goods-item"><h3>${title}</h3><p>${price}</p></div>`;
-};
-
-
-
-const renderGoodsList = (list = goods) => { //ДОБАВЛЕНО ЗНАЧЕНИЕ ПО УМОЛЧАНИЮ
-  let goodsList = list.map(item => renderGoodsItem(item.title, item.price));
-  document.querySelector('.goods-list').innerHTML = goodsList.join(''); //по умолчанию элементы массива разделяются запятой, с помощью метода join преобразуем элементы массива в строку, а в качестве разделителя используем указанный в скобках параметр
-}
-
-renderGoodsList();*/
-
-
 //hw2
 class GoodsItem {
   constructor(title, price) {
@@ -54,35 +30,59 @@ class GoodsList {
       listHtml += goodItem.render();
     });
     document.querySelector('.goods-list').innerHTML = listHtml;
-  }
+  };
+	
+//Добавьте для GoodsList метод, определяющий суммарную стоимость всех товаров.
+	cost() { 
+		let sum = 0;
+		this.goods.forEach(cost => {
+			const sumItem = new GoodsItem(cost.title, cost.price);
+			//console.log(cost.price);
+			sum+=cost.price;
+		});
+		console.log ('общая стоимость товаров составляет: ' + sum);
+	}
 };
 
 const list = new GoodsList();
 list.fetchGoods();
 list.render();
+list.cost();
 
 //Добавьте пустые классы для корзины товаров и элемента корзины товаров. Продумайте, какие методы понадобятся для работы с этими сущностями.
 
-class BasketGoodsList {
-	orderNumber() {//метод для формирования номера заказа
-		return 'number';
-	}; 
-	render() {}; //отправка списка товаров из корзины на заказ и оплату
-	clear() {}; //удаление всех товаров из корзины
-	sum() {//Добавьте для GoodsList метод, определяющий суммарную стоимость всех товаров
-		
+class GoodsListBasket extends GoodsList {
+	//метод для формирования номера заказа
+	//ДОБАВЛЕНО ЗНАЧЕНИЕ ПО УМОЛЧАНИЮ В ДОПОЛНЕНИЕ К ДЗ_1
+	num (number = 1) {
+		return number;
 	};
+	
+	//метод для определения общего кол-ва товаров в корзине
+	amount() {};
+	
+	//метод, определяющий суммарную стоимость всех товаров в корзине
+	cost() {};
+	
+	//метод для оформления заказа
+	put() {}; 
+	
+	//метод для удаления всех товаров из корзины
+	clear() {};
+	
 };
-//const a = new BasketGoodsList();
-//console.log(a.orderNumber());
 
-class BasketGoodsItem extends GoodsItem {
-	del() {}; //метод для удаления выбранного товара из корзины
-	add() {}; //метод для добавления товара в корзину(обработчик должен создавать копию ссылки на объект из GoodsList при нажатии кнопки "добавить")
+const listBasket = new GoodsListBasket();
+console.log(listBasket.num(285));
+
+class GoodsItemBasket extends GoodsItem {
+	//метод для изменения количества данного типа товара
+	setAmountItem() {};
+	
+	//метод для удаления выбранного товара из корзины
+	delItem() {};
 };
 
-
-//Добавьте для GoodsList метод, определяющий суммарную стоимость всех товаров.
 
 
 
