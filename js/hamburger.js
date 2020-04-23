@@ -26,18 +26,8 @@ const toppings = [
 		{ topping: 'Майонез', price: 20, calories: 5 },
     ];
 
-console.log('Возможный размер гамбургера: ');
-burgers.forEach( i => {
-	console.log('    ' + i.size);
-});
-
-console.log('Возможная начинка: ');
-stuffings.forEach( i => {
-	console.log('    ' + i.stuffing);
-});
-
 class Hamburger {
-	constructor(size, ...stuffing) {
+	constructor(size, stuffing) {
 		this.size = size;
 		this.stuffing = stuffing;
   	};
@@ -51,30 +41,27 @@ class Hamburger {
 	};  // Узнать начинку гамбургера
 	
   	getToppings() {
-		console.log('Список добавок: ');
-		toppings.forEach( i => {
-		console.log('    ' + i.topping);
-		});
+		return this.topping;
 	} // Получить список добавок
 
-	addTopping(topping) {  }// Добавить добавку
-  	removeTopping(topping) {  }// Убрать добавку
+	addTopping(topping) {
+		//добавляем в иниц. объект поле topping
+	}// Добавить добавку
+  	removeTopping(topping) {
+		//убираем из иниц. объекта поле topping
+	}// Убрать добавку
 	calculatePrice() {
-		let cost = burg.price+stuff.price+topp.price;
+		//let cost = burg.price+stuff.price+topp.price;
 		console.log('Итоговая стоимость гамбургера: ' + cost);
 	}// Узнать цену 
   	calculateCalories() {
-		let cal = burg.calories+stuff.calories+topp.calories;
+		//let cal = burg.calories+stuff.calories+topp.calories;
 		console.log('Итоговая калорийность гамбургера: '  + cal)
 	}// Узнать калорийность
 };
 
-let burg = burgers[0],
-	stuff = stuffings[1],
-	topp = toppings[1];
-
-let burger = new Hamburger(burg.size, stuff.stuffing, topp.topping);
-console.log('Размер выбранного гамбургера: ' + burger.getSize());
-console.log('Выбранная начинка: ' + (burger.getStuffing()).join('; '));
-burger.calculatePrice();
-burger.calculateCalories();
+let size,//random
+	stuffing;//random
+let burger = new Hamburger(size, stuffing);
+burger.getSize();
+burger.getStuffing();
