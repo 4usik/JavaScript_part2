@@ -12,8 +12,8 @@
 
 console.log('ЗАДАНИЕ 3*');
 const burgers = [
-		{ size: 'большой', price: 100, calories: 40 },
-      	{ size: 'маленький', price: 50, calories: 20 },
+		{ size: 'Большой', price: 100, calories: 40 },
+      	{ size: 'Маленький', price: 50, calories: 20 },
     ];
 
 const stuffings = [
@@ -26,6 +26,11 @@ const toppings = [
 		{ topping: 'Майонез', price: 20, calories: 5 },
     ];
 
+let [big, small] = burgers;
+let [cheese, salad, potato] = stuffings;
+let [spice, mayonaise] = toppings;
+//console.log(big);
+
 class Hamburger {
 	constructor(size, stuffing) {
 		this.size = size;
@@ -33,35 +38,60 @@ class Hamburger {
   	};
 
 	getSize() {
-		return this.size;
+		console.log('Выбран размер гамбургера: ' + this.size.size);
 	};// Узнать размер гамбургера
 	
 	getStuffing() {
-		return this.stuffing;
+		console.log('Выбрана начинка гамбургера: ' + this.stuffing.stuffing);
 	};  // Узнать начинку гамбургера
 	
   	getToppings() {
-		return this.topping;
+		if (this.topping !== undefined) {
+			console.log('Добавлен топпинг: ' + this.topping.topping);
+		} else {
+			console.log('Топпинг не добавлен');
+		}
 	} // Получить список добавок
 
 	addTopping(topping) {
-		//добавляем в иниц. объект поле topping
+		this.topping = topping;
 	}// Добавить добавку
-  	removeTopping(topping) {
-		//убираем из иниц. объекта поле topping
+	
+  	removeTopping() {
+		delete this.topping;
 	}// Убрать добавку
+	
 	calculatePrice() {
-		//let cost = burg.price+stuff.price+topp.price;
+		let cost;
+		if (this.topping !== undefined) {
+			cost = this.size.price+this.stuffing.price+this.topping.price;
+			//console.log(this.size.price, this.stuffing.price, this.topping.price);
+			} else {
+				cost = this.size.price+this.stuffing.price
+			}
 		console.log('Итоговая стоимость гамбургера: ' + cost);
-	}// Узнать цену 
+	}// Узнать цену
+	
   	calculateCalories() {
-		//let cal = burg.calories+stuff.calories+topp.calories;
+		let cal;
+		if (this.topping !== undefined) {
+			cal = this.size.calories+this.stuffing.calories+this.topping.calories;
+			//console.log(this.size.calories, this.stuffing.calories, this.topping.calories);
+			} else {
+				cal = this.size.calories+this.stuffing.calories
+			}
 		console.log('Итоговая калорийность гамбургера: '  + cal)
 	}// Узнать калорийность
 };
 
-let size,//random
-	stuffing;//random
-let burger = new Hamburger(size, stuffing);
+let burger = new Hamburger(big, salad);
 burger.getSize();
 burger.getStuffing();
+burger.addTopping(mayonaise);
+burger.getToppings();
+burger.calculatePrice();
+burger.calculateCalories();
+burger.removeTopping();
+burger.getToppings();
+burger.calculatePrice();
+burger.calculateCalories();

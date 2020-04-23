@@ -38,7 +38,7 @@ class GoodsList {
 		this.goods.forEach(cost => {
 			const sumItem = new GoodsItem(cost.title, cost.price);
 			//console.log(cost.price);
-			sum+=cost.price;
+			sum+=sumItem.price;
 		});
 		console.log ('общая стоимость товаров составляет: ' + sum);
 	}
