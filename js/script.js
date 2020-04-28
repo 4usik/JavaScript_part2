@@ -9,41 +9,41 @@ class GoodsItem {
   render() {
     return `<div class="goods-item"><h3>${this.title}</h3><p>${this.price}</p><button class="add">Добавить</button></div>`;
   }
-
 };
 
 class GoodsList {
-	constructor() {
-		this.goods = [];
-  	};
-	
-  	fetchGoods() {
-    	this.goods = [
-      		{ title: 'Shirt', price: 150 },
-      		{ title: 'Socks', price: 50 },
-      		{ title: 'Jacket', price: 350 },
-      		{ title: 'Shoes', price: 250 },
-    	];
-		
-	  	this.goods.forEach(good => {
-	  		const goodItem = new GoodsItem(good.title, good.price);
-	  		console.log(goodItem);
-			listHtml += goodItem.render();
-			sum+=good.price;
-	  	});
-  	};
-  	render() {
-    	document.querySelector('.goods-list').innerHTML = listHtml;
-  	};
+  constructor() {
+    this.goods = [];
+  };
+  fetchGoods() {
+    this.goods = [
+      { title: 'Shirt', price: 150 },
+      { title: 'Socks', price: 50 },
+      { title: 'Jacket', price: 350 },
+      { title: 'Shoes', price: 250 },
+    ];
+  };
+  render() {
+    let listHtml = '';
+    this.goods.forEach(good => {
+      const goodItem = new GoodsItem(good.title, good.price);
+      listHtml += goodItem.render();
+    });
+    document.querySelector('.goods-list').innerHTML = listHtml;
+  };
 	
 //Добавьте для GoodsList метод, определяющий суммарную стоимость всех товаров.
-	cost() {
+	cost() { 
+		let sum = 0;
+		this.goods.forEach(cost => {
+			const sumItem = new GoodsItem(cost.title, cost.price);
+			//console.log(cost.price);
+			sum+=sumItem.price;
+		});
 		console.log ('общая стоимость товаров составляет: ' + sum);
 	}
 };
 
-let listHtml = '',
-	sum = 0;
 const list = new GoodsList();
 list.fetchGoods();
 list.render();
