@@ -10,14 +10,23 @@ function makeGETRequest(url, callback) {
     	xhr = new ActiveXObject("Microsoft.XMLHTTP");
   	};
 
- 	xhr.onreadystatechange = function () {//ловим момент, когда ответ сервиса получен
-    	if (xhr.readyState === 4) {
-      	callback(xhr.responseText);//выполнится после получения ответа
-    	};
-  	};
+	  let p = new Promise(function (resolve) {
+		resolve(xhr.onreadystatechange = () => {
+			if (xhr.readyState === 4) {
+				callback(xhr.responseText);
+			}
+		});
+	  })
+	  p.then(function() {
+		xhr.open('GET', url, true);
+		xhr.send()
+	  });
 
-  xhr.open('GET', url, true);//тип запроса, адрес ресурса, указатель асинхронности
-  xhr.send();//метод для отправки запроса
+//	  xhr.onreadystatechange = function () {//ловим момент, когда ответ сервиса получен
+//    	if (xhr.readyState === 4) {
+//      	callback(xhr.responseText);//возвращает текст ответа от сервера на отправленный запрос
+//    	};
+//    };
 };
 
 const API_URL = 'https://raw.githubusercontent.com/GeekBrainsTutorial/online-store-api/master/responses';
@@ -35,42 +44,38 @@ class GoodsItem {
 
 class GoodsList {
 	constructor() {
-		this.goods = [];
-  	};
-	fetchGoods(cb) {
-    	makeGETRequest(`${API_URL}/catalogData.json`, (goods) => {
-      		this.goods = JSON.parse(goods);
-      		cb();
-			//console.log(this.goods);
-    	});
-  };
+		this.goods = []
+	  };
 
-  	render() {
-		let listHtml = '';
-		this.goods.forEach(good => {
-	  		const goodItem = new GoodsItem(good.product_name, good.price);
-	  		console.log(goodItem);
-			listHtml += goodItem.render();
-			sum +=good.price;
-	  	});
-    	document.querySelector('.goods-list').innerHTML = listHtml;
+	fetchGoods() {
+		let pr = new Promise( (resolve) => {
+			makeGETRequest(`${API_URL}/catalogData.json`, (goods) => {
+				this.goods = JSON.parse(goods);
+				resolve(this.goods)
+		  })
+		  
+		})
+		pr.then (() => {
+				let listHtml = '';
+				this.goods.forEach(good => {
+					  const goodItem = new GoodsItem(good.product_name, good.price);
+					  console.log(goodItem);
+					listHtml += goodItem.render();
+					sum +=good.price;
+				  });
+				document.querySelector('.goods-list').innerHTML = listHtml;
+			  }		)	
   	};
+
 	
-//Добавьте для GoodsList метод, определяющий суммарную стоимость всех товаров.
-	/*cost() {
-		//sum+=this.price;
-		console.log ('общая стоимость товаров составляет: ' + sum);
-	}*/
+	
 };
 
 
 let sum = 0;
 
 const list = new GoodsList();
-list.fetchGoods(() => {
-  	list.render();
-	//list.cost();
-});
+list.fetchGoods();
 
 //Добавьте пустые классы для корзины товаров и элемента корзины товаров. Продумайте, какие методы понадобятся для работы с этими сущностями.
 
