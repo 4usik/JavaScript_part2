@@ -17,27 +17,65 @@ console.log(str1.replace(regexp1, '\"'));
 /*3. *Создать форму обратной связи с полями: Имя, Телефон, E-mail, текст, кнопка Отправить. При нажатии на кнопку Отправить произвести валидацию полей/
 Если одно из полей не прошло валидацию, необходимо выделить это поле красной рамкой и сообщить пользователю об ошибке.*/
 
-function testForm() {
-
+function testName() {
     //Имя содержит только буквы
-    let name = document.getElementsByClassName('name'),
-    regexpName = /[A-Za-z]/,
-    resultTestName = regexpName.test(name);
-
-    //Телефон имеет вид +7(000)000-0000
-    let tel = document.getElementsByClassName('tel'), 
-    regexpTel = /\+7\(\d{3}\)\d{3}-\d{4}/,
-    resultTestTel = regexpTel.test(tel);
-    
-    //E-mail имеет вид mymail@mail.ru, или my.mail@mail.ru, или my-mail@mail.ru
-    let mail = document.getElementsByClassName('mail'),
-    regexpMail = /\w+@[a-z]{4}\.ru/,
-    resultTestMail = regexpMail.test(mail);
-
-    //Текст произвольный
-    let text = document.getElementsByClassName('text');
-    var regexpText = /\w|\W/,
-    resultTestText = regexpText.test(text);
-
-    return resultTestName, resultTestTel, resultTestMail, resultTestText;
+    let regexpName = /[A-Za-z]^\S/,
+        resultTestName = regexpName.test(name);       
+        return resultTestName;
 };
+
+function testTel() {
+    //Телефон имеет вид +7(000)000-0000
+    let regexpTel = /\+7\(\d{3}\)\d{3}-\d{4}/,
+        resultTestTel = regexpTel.test(tel);
+        return resultTestTel;
+};
+
+function testMail() {
+    //E-mail имеет вид mymail@mail.ru, или my.mail@mail.ru, или my-mail@mail.ru
+    let regexpMail = /\w+@[a-z]{4}\.ru/,
+        resultTestMail = regexpMail.test(mail);
+        return resultTestMail;
+};
+
+function testText() {
+    //Текст произвольный
+    let regexpText = /\w\W^\S/,
+        resultTestText = regexpText.test(text);
+        return resultTestText;
+};
+
+
+let name = document.getElementsByClassName('name'),
+    tel = document.getElementsByClassName('tel'),
+    mail = document.getElementsByClassName('mail'),
+    text = document.getElementsByClassName('text');
+
+//вызов функции testForm() по клику на кнопку
+let btn = document.getElementsByClassName('button');    
+
+btn[1].addEventListener('mousedown', function () {
+    let testNam = testName(),
+        testPhone = testTel(),
+        testEMail = testMail(),
+        testQText = testText();
+    console.log (testNam, testPhone, testEMail, testQText);
+
+    //проверка содержимого полей
+    if (testNam == false) {
+        name[0].style.border = '2px solid red';
+    };
+
+    if (testPhone == false) {
+        tel[0].style.border = '2px solid red';
+    };
+
+    if (testEMail == false) {
+        mail[0].style.border = '2px solid red';
+    };
+
+    if (testQText == false) {
+        text[0].style.border = '2px solid red';
+    }; 
+});
+        
