@@ -14,8 +14,10 @@
 			<button class="menu" type="button">Меню</button>
 			 <input type="text" class="goods-search" v-model= "searchLine"/>
 			 <!--<p>Поиск {{ searchLine }}</p>-->
-		  	<button class="search-button" type="button" @click="filterGoods">Искать</button>
-		  	<button class="cart-button" type="button">Корзина</button>
+			  <button class="search-button" type="button" @click="filterGoods">Искать</button>
+			  <!--условие взято для проверки, исправить: кнопка должна быть скрыта, если в корзину не добавлен ни один товар-->
+			  <a href="basket.html" v-if="searchLine.length!=0"><button class="cart-button" type="button">Корзина</button></a>
+		  	
 		</header>
 		<main>
 			<div class="goods-list">
@@ -25,7 +27,7 @@
 				</div>
 			</div>
 		</main>
-	  </div>
+	</div>
 	
 	<div class="href"><a href="hw4.html">Обратная связь</a></div>
 	

@@ -7,7 +7,8 @@ const app = new Vue({
 	data: {
 		goods: [],
 		filteredGoods:[],
-		searchLine:''
+		searchLine:'',
+		isVisibleCart:[]
 	},
 	methods: {
 		makeGETRequest(url, callback){

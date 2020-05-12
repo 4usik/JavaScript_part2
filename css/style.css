@@ -86,7 +86,8 @@ p {
 	align-items: center;
 }
 
-.info {
+.info,
+.address {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
