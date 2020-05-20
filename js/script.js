@@ -8,11 +8,15 @@ const app = new Vue({
 		goods: [],
 		filteredGoods:[],
 		searchLine:'',
-		isVisibleCart:[]
+		isVisibleCart:[],
+		/*computed: {
+			sumBasket() {
+				
+			}
+		}*/
 	},
 	methods: {
 		makeGETRequest(url, callback){
-			const API_URL = 'https://raw.githubusercontent.com/GeekBrainsTutorial/online-store-api/master/responses';
 
 			var xhr;
 			
@@ -60,8 +64,8 @@ const app = new Vue({
 
 	mounted() {
 		this.makeGETRequest(`${API_URL}/catalogData.json`, (goods) => {
-			this.goods = goods;
-			this.filteredGoods = goods;
+			this.goods = JSON.parse(goods);
+			this.filteredGoods = JSON.parse(goods);
 		})	
 	}
 });
