@@ -11,27 +11,18 @@
 
 	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 
-	<div id="app">
+	<div id="app"> 
 		<header>
 			<button class="menu" type="button">Меню</button>
-			<input type="text" class="goods-search" />
-			<!--v-model= "searchLine"-->
-			<button class="search-button" type="button" >Искать</button> <!--@click="filterGoods"-->
-			<button id="btn_modal_window" class="cart-button" >Корзина</button><!--v-on:click="clickBtnBasket"
-				v-if="this.isVisibleCart.length != 0"-->  
+			<search></search>
+			<button id="btn_basket" class="cart-button" v-on:click="clickBtnBasket">Корзина</button>
+			<!--v-if="this.isVisibleCart.length != 0"-->  
 		</header>
 
 		<basket></basket>
 
 		<main>
 			<goods-list :goods="filteredGoods"></goods-list>
-			<!--<div class="goods-list">
-				<div class="goods-item" v-for="good in filteredGoods">
-					<h3>{{ good.product_name }}</h3>
-					<p>{{ good.price }}</p>
-					<button class="add" @click="addToBasket">Добавить</button></div>
-				</div>
-			</div>-->
 		</main>
 	</div>
 	

@@ -60,11 +60,10 @@ Vue.component('basket', {
 
 	},
 
-	//@click="clickBtnCloseBasket"
 	template: `
 		<div id="basket" class="basket">
 			<div class="basket_content">
-				<span class="close_basket" >×</span>
+				<span class="close_basket" @click="clickBtnCloseBasket">×</span>
 				<div>
 					<p>Заказ:{{ this.isVisibleCart }}</p>
 					<p>Сумма заказа:<!--{{ }}--></p>
@@ -101,7 +100,7 @@ Vue.component('basket', {
 		</div>
 	`
 });
-/*
+
 Vue.component('search', {
 	props: [],
 
@@ -117,10 +116,15 @@ Vue.component('search', {
 		}
 	},
 
+	//v-model= "searchLine"
 	template: `
-	`
+		<div>
+			<input type="text" class="goods-search" />
+			<button class="search-button" type="button">Искать</button>
+		</div>
+	`// @click="filterGoods"
 });
-*/
+
 const app = new Vue({
 	el: '#app',
 	data: {
@@ -152,7 +156,17 @@ const app = new Vue({
 		
 			xhr.open('GET', url, true);
 			xhr.send();
-		}
+		},
+		clickBtnBasket() {
+			let basket = document.getElementById("basket");
+			
+			window.onclick = function (event) {
+    			if (event.target == basket) {
+        		basket.style.display = "none";
+    			}
+			}
+			basket.style.display = "block";
+		},
 
 	},
 
