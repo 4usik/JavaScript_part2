@@ -17,7 +17,7 @@
 			<input type="text" class="goods-search" v-model= "searchLine"/>
 			<!--<p>Поиск {{ searchLine }}</p>-->
 			<button class="search-button" type="button" @click="filterGoods">Искать</button>
-			<button id="btn_modal_window" class="cart-button" v-on:click="clickBtnBasket">Корзина</button>  
+			<button id="btn_modal_window" class="cart-button" v-on:click="clickBtnBasket" v-if="this.isVisibleCart.length != 0">Корзина</button>  
 		</header>
 
 		<div id="basket" class="basket">

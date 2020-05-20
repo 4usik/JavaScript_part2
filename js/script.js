@@ -33,6 +33,13 @@ const app = new Vue({
 		},
 
 		clickBtnBasket() {
+			let basket = document.getElementById("basket");
+			
+			window.onclick = function (event) {
+    			if (event.target == basket) {
+        		basket.style.display = "none";
+    			}
+			}
 			basket.style.display = "block";
 		},
 
@@ -41,7 +48,8 @@ const app = new Vue({
 		},
 
 		addToBasket() {
-			console.log('добавлено');
+			this.isVisibleCart.push(" "); //добавлять в массив карточку
+			//console.log(this.isVisibleCart.length);
 		},
 
 		filterGoods() {
@@ -57,25 +65,6 @@ const app = new Vue({
 		})	
 	}
 });
-
-/*class GoodsItem {
-  constructor(product_name, price) {
-    this.product_name = product_name;
-    this.price = price;
-  };
-  render() {
-    return `<div class="goods-item"><h3>${this.product_name}</h3><p>${this.price}</p><button class="add">Добавить</button></div>`;
-  }
-
-};*/
-
-let basket = document.getElementById("basket");
-
-window.onclick = function (event) {
-    if (event.target == basket) {
-        basket.style.display = "none";
-    }
-}
 
 
 
