@@ -59,13 +59,14 @@
 		  </div>
 
 		<main>
-			<div class="goods-list">
+			<goods-list :goods="filteredGoods"></goods-list>
+			<!--<div class="goods-list">
 				<div class="goods-item" v-for="good in filteredGoods">
 					<h3>{{ good.product_name }}</h3>
 					<p>{{ good.price }}</p>
 					<button class="add" @click="addToBasket">Добавить</button></div>
 				</div>
-			</div>
+			</div>-->
 		</main>
 	</div>
 	
@@ -77,3 +78,5 @@
 	<footer>by Tatiana Bugay</footer>
 </body>
 
+<!-- Вынести поиск в отдельный компонент.
+Вынести корзину в отдельный компонент. -->
