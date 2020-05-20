@@ -36,7 +36,7 @@ main {
 .goods-item {
 	margin: 20px;
 	height: 300px;
-	width: 43%;
+	width: 300px;
 	border: 2px solid #6B075B;
 	text-align: center;
 	color: #7B2A6E;
@@ -86,7 +86,8 @@ p {
 	align-items: center;
 }
 
-.info {
+.info,
+.address {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -107,4 +108,33 @@ input {
 	margin: 30px 0 10px;
 	height: 30px;
 	width: 90px;
+}
+
+
+.basket {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.6);
+    z-index: 1000;
+}
+.basket .basket_content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    z-index: 99999;
+}
+.basket .basket_content .close_basket {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
 }

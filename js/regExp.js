@@ -20,7 +20,7 @@ console.log(str1.replace(regexp1, '\"'));
 function testName() {
     //Имя содержит только буквы
     let regexpName = /[A-Za-z]^\S/,
-        resultTestName = regexpName.test(name);       
+        resultTestName = regexpName.test(name.value);       
         return resultTestName;
 };
 
@@ -46,11 +46,11 @@ function testText() {
 };
 
 
-let name = document.getElementsByClassName('name'),
+let name = document.querySelector('input'),
     tel = document.getElementsByClassName('tel'),
     mail = document.getElementsByClassName('mail'),
     text = document.getElementsByClassName('text');
-
+    
 //вызов функции testForm() по клику на кнопку
 let btn = document.getElementsByClassName('button');    
 
@@ -63,7 +63,7 @@ btn[1].addEventListener('mousedown', function () {
 
     //проверка содержимого полей
     if (testNam == false) {
-        name[0].style.border = '2px solid red';
+        name.style.border = '2px solid red';
     };
 
     if (testPhone == false) {
@@ -77,5 +77,6 @@ btn[1].addEventListener('mousedown', function () {
     if (testQText == false) {
         text[0].style.border = '2px solid red';
     }; 
+    
 });
         
