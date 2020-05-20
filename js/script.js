@@ -56,8 +56,14 @@ const app = new Vue({
 			//console.log(this.isVisibleCart.length);
 		},
 
-		filterGoods() {
-			console.log('Клик');
+		filterGoods() { 
+			let filter = document.getElementsByClassName("goods-item");
+
+			for (let i = 0; i<filter.length; i++) {
+				if (this.goods[i].product_name.toUpperCase() !== this.searchLine.toUpperCase()) {
+					filter[i].style.display = "none";
+				}
+			}
 		},
 
 	},
