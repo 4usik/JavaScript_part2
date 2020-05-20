@@ -8,17 +8,61 @@
 	<link rel="stylesheet" href="css/style.css"> </head>
 
 <body>
-	<script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
 	<div id="app">
 		<header>
 			<button class="menu" type="button">Меню</button>
-			 <input type="text" class="goods-search" v-model= "searchLine"/>
-			 <!--<p>Поиск {{ searchLine }}</p>-->
-			  <button class="search-button" type="button" @click="filterGoods">Искать</button>
-			  <!--условие взято для проверки, исправить: кнопка должна быть скрыта, если в корзину не добавлен ни один товар-->
-			  <a href="basket.html" v-if="searchLine.length!=0"><button class="cart-button" type="button">Корзина</button></a>
-		  	
+			<input type="text" class="goods-search" v-model= "searchLine"/>
+			<!--<p>Поиск {{ searchLine }}</p>-->
+			<button class="search-button" type="button" @click="filterGoods">Искать</button>
+			<button id="btn_modal_window" class="cart-button" v-on:click="clickBtnBasket">Корзина</button>  
 		</header>
+
+		<div id="my_modal" class="modal">
+			<div class="modal_content">
+				<span class="close_modal_window" @click="clickBtnCloseBasket">×</span>
+				<form class="field">
+					<fieldset class="info">
+						<legend>Личные данные</legend>
+							<label for="name">Ваше имя</label>
+							<input type="text" class="name" autofocus>
+		
+							<label for="tel">Ваш телефон</label>
+							<input type="text" class="tel">
+		
+							<label for="mail">Ваш e-mail</label>
+							<input type="text"class="mail">	
+					</fieldset>
+					
+					<fieldset class="address">
+						<legend>Адрес доставки</legend>
+							<label for="street">Улица</label>
+							<input type="text" class="street">
+		
+							<label for="build">Дом</label>
+							<input type="text" class="build">
+		
+							<label for="entrance">Подъезд</label>
+							<input type="text"class="entrance">
+		
+							<label for="flat">Квартира</label>
+							<input type="text"class="flat">
+		
+							<label for="floor">Этаж</label>
+							<input type="text"class="floor">
+							
+							<label for="comment">Комментарий к заказу:</label>
+							<textarea class="text"></textarea>
+						<div>
+							<button class="button">Заказать</button>
+						</div>
+					</fieldset>
+				</form>
+			</div>
+		  </div>
+
 		<main>
 			<div class="goods-list">
 				<div class="goods-item" v-for="good in filteredGoods">

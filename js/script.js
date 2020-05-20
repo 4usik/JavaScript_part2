@@ -30,13 +30,22 @@ const app = new Vue({
 		
 			xhr.open('GET', url, true);
 			xhr.send();
-		
 		},
+
+		clickBtnBasket() {
+			modal.style.display = "block";
+		},
+
+		clickBtnCloseBasket() {
+			modal.style.display = "none";
+		},
+
 		filterGoods() {
 			console.log('Клик');
 		},
-	
+
 	},
+
 	mounted() {
 		this.makeGETRequest(`${API_URL}/catalogData.json`, (goods) => {
 			this.goods = goods;
@@ -56,7 +65,13 @@ class GoodsItem {
 
 };
 
+let modal = document.getElementById("my_modal");
 
+window.onclick = function (event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
 
 
 
