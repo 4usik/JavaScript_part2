@@ -20,9 +20,9 @@
 			<button id="btn_modal_window" class="cart-button" v-on:click="clickBtnBasket">Корзина</button>  
 		</header>
 
-		<div id="my_modal" class="modal">
-			<div class="modal_content">
-				<span class="close_modal_window" @click="clickBtnCloseBasket">×</span>
+		<div id="basket" class="basket">
+			<div class="basket_content">
+				<span class="close_basket" @click="clickBtnCloseBasket">×</span>
 				<form class="field">
 					<fieldset class="info">
 						<legend>Личные данные</legend>
@@ -68,6 +68,7 @@
 				<div class="goods-item" v-for="good in filteredGoods">
 					<h3>{{ good.product_name }}</h3>
 					<p>{{ good.price }}</p>
+					<button class="add" @click="addToBasket">Добавить</button></div>
 				</div>
 			</div>
 		</main>

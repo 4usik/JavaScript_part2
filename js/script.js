@@ -33,11 +33,15 @@ const app = new Vue({
 		},
 
 		clickBtnBasket() {
-			modal.style.display = "block";
+			basket.style.display = "block";
 		},
 
 		clickBtnCloseBasket() {
-			modal.style.display = "none";
+			basket.style.display = "none";
+		},
+
+		addToBasket() {
+			console.log('добавлено');
 		},
 
 		filterGoods() {
@@ -54,7 +58,7 @@ const app = new Vue({
 	}
 });
 
-class GoodsItem {
+/*class GoodsItem {
   constructor(product_name, price) {
     this.product_name = product_name;
     this.price = price;
@@ -63,13 +67,13 @@ class GoodsItem {
     return `<div class="goods-item"><h3>${this.product_name}</h3><p>${this.price}</p><button class="add">Добавить</button></div>`;
   }
 
-};
+};*/
 
-let modal = document.getElementById("my_modal");
+let basket = document.getElementById("basket");
 
 window.onclick = function (event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
+    if (event.target == basket) {
+        basket.style.display = "none";
     }
 }
 
