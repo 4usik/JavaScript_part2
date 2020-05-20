@@ -14,23 +14,7 @@ Vue.component('goods-list', {
 
 Vue.component('goods-item', {
 	props: ['good'],
-
-	methods: {
-	},
-
-	template: `
-	  <div class="goods-item">
-		<h3>{{ good.product_name }}</h3>
-		<p>{{ good.price }}</p>
-		<button class="add" >Добавить</button>
-	  </div>
-	`
-	//@click="addToBasket"
-});
-
-Vue.component('basket', {
-	props: [],
-
+	
 	data() {
 		return {
 			isVisibleCart:[],
@@ -39,9 +23,24 @@ Vue.component('basket', {
 
 	methods: {
 		addToBasket() {
-			this.isVisibleCart.push(" "); //добавлять в массив карточку
+			this.isVisibleCart.push("1 "); //добавлять в массив карточку
 			console.log(this.isVisibleCart);
 		},
+	},
+
+	template: `
+	  <div class="goods-item">
+		<h3>{{ good.product_name }}</h3>
+		<p>{{ good.price }}</p>
+		<button class="add" @click="addToBasket">Добавить</button>
+	  </div>
+	`
+});
+
+Vue.component('basket', {
+	props: [],
+
+	methods: {
 
 		clickBtnBasket() {
 			let basket = document.getElementById("basket");
@@ -65,8 +64,7 @@ Vue.component('basket', {
 			<div class="basket_content">
 				<span class="close_basket" @click="clickBtnCloseBasket">×</span>
 				<div>
-					<p>Заказ:{{ this.isVisibleCart }}</p>
-					<p>Сумма заказа:<!--{{ }}--></p>
+					<p>Заказ:{{this.isVisibleCart}}</p>
 				</div>
 				<form class="field">
 					<fieldset class="info">
@@ -104,25 +102,33 @@ Vue.component('basket', {
 Vue.component('search', {
 	props: [],
 
+	data() {
+		return {
+			searchLine:'',
+		} 
+	},
+
 	methods: {
 		filterGoods() { 
 			let filter = document.getElementsByClassName("goods-item");
+			console.log(filter);
 
 			for (let i = 0; i<filter.length; i++) {
-				if (this.goods[i].product_name.toUpperCase() !== this.searchLine.toUpperCase()) {
+				
+				if (this.goods[i].product_name.toUpperCase() !== this.searchLine.toUpperCase()) { //проблема в области видимости this.goods
 					filter[i].style.display = "none";
 				}
 			}
 		}
 	},
 
-	//v-model= "searchLine"
 	template: `
 		<div>
-			<input type="text" class="goods-search" />
-			<button class="search-button" type="button">Искать</button>
+			<input type="text" class="goods-search" v-model= "searchLine"/>
+			<button class="search-button" type="button" @click="filterGoods">Искать</button>
+			<basket></basket>
 		</div>
-	`// @click="filterGoods"
+	`
 });
 
 const app = new Vue({
@@ -130,13 +136,14 @@ const app = new Vue({
 	data: {
 		goods: [],
 		filteredGoods:[],
-		searchLine:'',
+		
 		isVisibleCart:[],
 		//computed: {
-		//	sumBasket() {		
+		//	calcBasket() {		
 		//	}
 		
 	},
+
 	methods: {
 		makeGETRequest(url, callback){
 
