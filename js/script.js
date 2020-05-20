@@ -2,6 +2,125 @@
 
 const API_URL = 'https://raw.githubusercontent.com/GeekBrainsTutorial/online-store-api/master/responses';
 
+Vue.component('goods-list', {
+	props: ['goods'],
+	
+	template: `
+	  <div class="goods-list">
+		<goods-item v-for="good in goods" :good="good"></goods-item>
+	  </div>
+	`
+});
+
+Vue.component('goods-item', {
+	props: ['good'],
+
+	methods: {
+	},
+
+	template: `
+	  <div class="goods-item">
+		<h3>{{ good.product_name }}</h3>
+		<p>{{ good.price }}</p>
+		<button class="add" >Добавить</button>
+	  </div>
+	`
+	//@click="addToBasket"
+});
+
+Vue.component('basket', {
+	props: [],
+
+	data() {
+		return {
+			isVisibleCart:[],
+		}
+	},
+
+	methods: {
+		addToBasket() {
+			this.isVisibleCart.push(" "); //добавлять в массив карточку
+			console.log(this.isVisibleCart);
+		},
+
+		clickBtnBasket() {
+			let basket = document.getElementById("basket");
+			
+			window.onclick = function (event) {
+    			if (event.target == basket) {
+        		basket.style.display = "none";
+    			}
+			}
+			basket.style.display = "block";
+		},
+
+		clickBtnCloseBasket() {
+			basket.style.display = "none";
+		},
+
+	},
+
+	//@click="clickBtnCloseBasket"
+	template: `
+		<div id="basket" class="basket">
+			<div class="basket_content">
+				<span class="close_basket" >×</span>
+				<div>
+					<p>Заказ:{{ this.isVisibleCart }}</p>
+					<p>Сумма заказа:<!--{{ }}--></p>
+				</div>
+				<form class="field">
+					<fieldset class="info">
+						<legend>Личные данные</legend>
+							<label for="name">Ваше имя</label>
+							<input type="text" class="name" autofocus>
+		
+							<label for="tel">Ваш телефон</label>
+							<input type="text" class="tel">
+					</fieldset>
+					
+					<fieldset class="address">
+						<legend>Адрес доставки</legend>
+							<label for="street">Улица</label>
+							<input type="text" class="street">
+		
+							<label for="build">Дом</label>
+							<input type="text" class="build">
+
+							<label for="flat">Квартира</label>
+							<input type="text"class="flat">
+
+							<label for="comment">Комментарий к заказу:</label>
+							<textarea class="text"></textarea>
+						<div>
+							<button class="button">Заказать</button>
+						</div>
+					</fieldset>
+				</form>
+			</div>
+		</div>
+	`
+});
+/*
+Vue.component('search', {
+	props: [],
+
+	methods: {
+		filterGoods() { 
+			let filter = document.getElementsByClassName("goods-item");
+
+			for (let i = 0; i<filter.length; i++) {
+				if (this.goods[i].product_name.toUpperCase() !== this.searchLine.toUpperCase()) {
+					filter[i].style.display = "none";
+				}
+			}
+		}
+	},
+
+	template: `
+	`
+});
+*/
 const app = new Vue({
 	el: '#app',
 	data: {
@@ -9,11 +128,10 @@ const app = new Vue({
 		filteredGoods:[],
 		searchLine:'',
 		isVisibleCart:[],
-		/*computed: {
-			sumBasket() {
-				
-			}
-		}*/
+		//computed: {
+		//	sumBasket() {		
+		//	}
+		
 	},
 	methods: {
 		makeGETRequest(url, callback){
@@ -34,37 +152,7 @@ const app = new Vue({
 		
 			xhr.open('GET', url, true);
 			xhr.send();
-		},
-
-		clickBtnBasket() {
-			let basket = document.getElementById("basket");
-			
-			window.onclick = function (event) {
-    			if (event.target == basket) {
-        		basket.style.display = "none";
-    			}
-			}
-			basket.style.display = "block";
-		},
-
-		clickBtnCloseBasket() {
-			basket.style.display = "none";
-		},
-
-		addToBasket() {
-			this.isVisibleCart.push(" "); //добавлять в массив карточку
-			//console.log(this.isVisibleCart.length);
-		},
-
-		filterGoods() { 
-			let filter = document.getElementsByClassName("goods-item");
-
-			for (let i = 0; i<filter.length; i++) {
-				if (this.goods[i].product_name.toUpperCase() !== this.searchLine.toUpperCase()) {
-					filter[i].style.display = "none";
-				}
-			}
-		},
+		}
 
 	},
 
@@ -76,27 +164,4 @@ const app = new Vue({
 	}
 });
 
-/*
-Vue.component ('goods-list', {
-	props: ['goods'],
-  	template: `
-    	<div class="goods-list">
-      		<goods-item v-for="good in goods" :good="good"></goods-item>
-    	</div>
-  		`
-});
-
-Vue.component ('good-item', {
-	  props: ['good'],
-  template: `
-    <div class="goods-item">
-      <h3>{{ good.product_name }}</h3>
-      <p>{{ good.price }}</p>
-    </div>
-  `
-});*/
-
-Vue.component('some-component', {
-	template: '<h1><slot></slot></h1>'
-  });
 
